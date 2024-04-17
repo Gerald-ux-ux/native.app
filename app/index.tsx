@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import useFont from "./hooks/useFont";
 import { useEffect } from "react";
-import { SplashScreen } from "expo-router";
+import { Link, SplashScreen } from "expo-router";
 
 export default function App() {
   const { fontsLoaded, error } = useFont();
@@ -19,6 +19,7 @@ export default function App() {
       <Text style={{ fontFamily: "Poppins-Black" }} className="text-3xl ">
         Aora!
       </Text>
+      <Link href="/create">Go home</Link>
       <StatusBar style="auto" />
     </View>
   );
