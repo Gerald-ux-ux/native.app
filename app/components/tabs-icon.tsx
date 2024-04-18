@@ -18,6 +18,7 @@ export default function TabIcon({ icon, color, name, focused }: TabIconProps) {
         className="w-5 h-5"
       />
       <Text
+        style={{ color: color }}
         className={clsx(focused ? "font-semibold" : "font-normal", "text-xs")}
       >
         {name}

@@ -6,7 +6,19 @@ import TabIcon from "../components/tabs-icon";
 
 const TabsLayout = () => {
   return (
-    <Tabs screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#ffa001",
+        tabBarInactiveTintColor: "#CDCDE0",
+        tabBarStyle: {
+          backgroundColor: "#161622",
+          borderTopWidth: 1,
+          borderTopColor: "#232533",
+          height: 84
+        },
+      }}
+    >
       {tabsConfig.map((tab) => (
         <Tabs.Screen
           key={tab.name}
