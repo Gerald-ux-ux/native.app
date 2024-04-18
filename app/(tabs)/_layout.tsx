@@ -1,42 +1,14 @@
 import { Tabs } from "expo-router";
 import React from "react";
 
-import icons from "../../constants/icons";
+import { tabsConfig } from "../components/tabs";
 import TabIcon from "../components/tabs-icon";
-
-const tabsConfig = [
-  {
-    name: "home",
-    icon: icons.home,
-    title: "Home",
-    headerShown: false,
-  },
-  {
-    name: "bookmarks",
-    icon: icons.bookmark,
-    title: "Bookmarks",
-    headerShown: false,
-  },
-  {
-    name: "create",
-    icon: icons.upload,
-    title: "Create",
-    headerShown: false,
-  },
-  {
-    name: "profile",
-    icon: icons.profile,
-    title: "Profile",
-    headerShown: false,
-  },
-];
 
 const TabsLayout = () => {
   return (
     <Tabs screenOptions={{ tabBarShowLabel: false }}>
       {tabsConfig.map((tab) => (
         <Tabs.Screen
-
           key={tab.name}
           name={tab.name}
           options={{
