@@ -19,7 +19,7 @@ export default function App() {
       <Text style={{ fontFamily: "Poppins-Black" }} className="text-3xl ">
         Aora!
       </Text>
-      <Link href="/create">Go home</Link>
+      <Link href="/home">Go home</Link>
       <StatusBar style="auto" />
     </View>
   );
