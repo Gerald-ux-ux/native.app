@@ -12,9 +12,8 @@ export default function SignUpFormComponent({ form, setForm }: FormProps) {
       <FormField
         title="Username"
         value={form.username}
-        handleChangeText={(newUsername: string) => {
-          setForm({ ...form, username: newUsername });
-          console.log("username", newUsername); // Correctly log the new username
+        handleChangeText={(e: any) => {
+          setForm({ ...form, username: e });
         }}
         otherStyles="mt-10"
       />

@@ -1,6 +1,7 @@
-import { View, Text, TextInput } from "react-native";
-import React, { useState } from "react";
 import clsx from "clsx";
+import React, { useState } from "react";
+import { Text, TextInput, View } from "react-native";
+
 type FormFieldProps = {
   title: string;
   value: string;
@@ -28,7 +29,7 @@ const FormField = ({
           value={value}
           placeholder={placeholder}
           placeholderTextColor="#7b7b8b"
-          onChange={handleChangeText}
+          onChangeText={handleChangeText}
           secureTextEntry={title === "Password" && !showPassword}
         />
       </View>

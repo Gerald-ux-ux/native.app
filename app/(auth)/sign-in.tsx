@@ -4,18 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../../constants/images";
 import FormField from "../components/auth/form-field";
 import CustomButton from "../components/custom-btn";
-import { Link } from "expo-router";
 import Footer from "../components/auth/footer";
+import useSignIn from "../hooks/auth/useSignIn";
+import FormErrorMessage from "../../components/errors/form-error-message";
 
 const SignIn = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const submit = () => {};
+  const { form, setForm, error, submit, isSubmitting } = useSignIn();
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -46,6 +40,10 @@ const SignIn = () => {
             otherStyles="mt-7"
             // keyboardType="password"
           />
+
+          {error.success === false ? (
+            <FormErrorMessage message={error.message} />
+          ) : null}
           <CustomButton
             containerStyles="mt-7"
             text="Sign In"

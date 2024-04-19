@@ -1,25 +1,18 @@
-import { Link, router, SplashScreen } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import useFont from "./hooks/useFont";
 import images from "../constants/images";
 import CustomButton from "./components/custom-btn";
+import { useGlobalContext } from "../context/GlobalProvide";
 
 export default function App() {
-  const { fontsLoaded, error } = useFont();
+  const { isLoading, isLoggedIn } = useGlobalContext();
 
-  useEffect(() => {
-    if (error) throw error;
+  if (isLoading && !isLoggedIn) return <Redirect href="/home" />;
 
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error]);
-
-  if (!fontsLoaded && !error) return;
   return (
-    // Ensure that content does not overlap
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View className="w-full h-full justify-center items-center  px-4">
