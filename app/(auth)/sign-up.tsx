@@ -1,39 +1,18 @@
-import { View, Text, ScrollView, Image, Alert } from "react-native";
+import { router } from "expo-router";
 import React, { useState } from "react";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import images from "../../constants/images";
-import CustomButton from "../components/custom-btn";
+import { createUser } from "../../lib/appwrite";
 import Footer from "../components/auth/footer";
 import SignUpFormComponent from "../components/auth/sign-up-form";
-import { createUser } from "../../lib/appwrite";
-import { router } from "expo-router";
+import CustomButton from "../components/custom-btn";
+import useSignUp from "../hooks/auth/useSignUp";
+import FormErrorMessage from "../../components/errors/form-error-message";
 
 const SignUp = () => {
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const submit = async () => {
-    setIsSubmitting(true);
-    if (!form.email || !form.password || !form.username) {
-      Alert.alert("Error: Please enter all required fields");
-    }
-
-    try {
-      const res = await createUser(form.username, form.password, form.email);
-      console.log("res here is ", res);
-      router.replace("/home");
-    } catch (error: any) {
-      // console.log("error here is ", error);
-      Alert.alert("Error", error?.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { form, setForm, submit, isSubmitting, error } = useSignUp();
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -47,6 +26,9 @@ const SignUp = () => {
             Sign Up
           </Text>
           <SignUpFormComponent form={form} setForm={setForm} />
+          {error.success === false ? (
+            <FormErrorMessage message={error.message} />
+          ) : null}
           <CustomButton
             containerStyles="mt-7"
             text="Sign Up"
