@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { createUser } from "../../../lib/appwrite";
+import { signIn } from "../../../lib/appwrite";
 import { router } from "expo-router";
-import { Alert } from "react-native";
 
-export default function useSignUp() {
+export default function useSignIn() {
   const [form, setForm] = useState({
-    username: "",
     email: "",
     password: "",
   });
@@ -17,13 +15,13 @@ export default function useSignUp() {
   });
   const submit = async () => {
     setIsSubmitting(true);
-    if (!form.email || !form.password || !form.username) {
+    if (!form.email || !form.password) {
       setError({
         ...error,
         message: "Please fill all the fields",
       });
     }
-    const res = await createUser(form.username, form.email, form.password);
+    const res = await signIn(form.email, form.password);
     if (res.success === false) {
       setError({
         message: res.message,
