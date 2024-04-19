@@ -2,8 +2,10 @@ import { useState } from "react";
 import { createUser } from "../../../lib/appwrite";
 import { router } from "expo-router";
 import { Alert } from "react-native";
+import { useGlobalContext } from "../../../context/GlobalProvide";
 
 export default function useSignUp() {
+  const { setIsLoggedIn, setUser } = useGlobalContext();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -34,6 +36,8 @@ export default function useSignUp() {
         ...error,
         success: true,
       });
+      setIsLoggedIn(true);
+      setUser(res);
       router.replace("/home");
     }
     setIsSubmitting(false);

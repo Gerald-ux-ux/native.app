@@ -1,7 +1,17 @@
-import React from "react";
-import { Slot, Stack } from "expo-router";
+import React, { useEffect } from "react";
+import { Slot, SplashScreen, Stack } from "expo-router";
 import GlobalProvider from '../context/GlobalProvide'
+import useFont from "./hooks/useFont";
 const RootLayout = () => {
+    const { fontsLoaded, error } = useFont();
+
+    useEffect(() => {
+      if (error) throw error;
+
+      if (fontsLoaded) SplashScreen.hideAsync();
+    }, [fontsLoaded, error]);
+
+    if (!fontsLoaded && !error) return;
   return (
     <GlobalProvider>
       <Stack>

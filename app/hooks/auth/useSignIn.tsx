@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { signIn } from "../../../lib/appwrite";
 import { router } from "expo-router";
+import { useGlobalContext } from "../../../context/GlobalProvide";
 
 export default function useSignIn() {
+  const { setIsLoggedIn, setUser } = useGlobalContext();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -32,6 +35,8 @@ export default function useSignIn() {
         ...error,
         success: true,
       });
+      setIsLoggedIn(true);
+      setUser(res);
       router.replace("/home");
     }
     setIsSubmitting(false);
