@@ -1,5 +1,5 @@
-import React from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../constants/images";
@@ -8,10 +8,16 @@ import SearchInput from "../components/tabs/search-input";
 import Trending from "../components/tabs/trending";
 
 const Home = () => {
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    setRefreshing(false);
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[]}
+        data={[{ id: 1 }, { id: 2 }]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
@@ -51,6 +57,9 @@ const Home = () => {
             description="Be the first one to upload a video"
           />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
