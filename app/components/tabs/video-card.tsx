@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import icons from "../../../constants/icons";
 
@@ -52,6 +52,18 @@ const VideoCard = ({
           />
         </View>
       </View>
+
+      {play ? (
+        <Text> Play</Text>
+      ) : (
+        <TouchableOpacity className="w-full h-60 rounded-xl mt-3 relative justify-center items-center">
+          <Image
+            source={{ uri: thumbnail }}
+            resizeMode="contain"
+            className="w-hull h-full rounded-xl  mt-3 "
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

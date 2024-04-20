@@ -50,7 +50,7 @@ const Home = () => {
                 Latest videos
               </Text>
 
-              <Trending posts={[{ id: 1 }, { id: 2 }] ?? []} />
+              {/* <Trending posts={[{ id: 1 }, { id: 2 }] ?? []} /> */}
             </View>
           </View>
         )}
