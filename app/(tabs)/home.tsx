@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../constants/images";
+import { getAllPosts } from "../../lib/appwrite";
 import EmptyState from "../components/tabs/empty-state";
 import SearchInput from "../components/tabs/search-input";
 import Trending from "../components/tabs/trending";
+import useAppWrite from "../hooks/tabs/useAppWrite";
+import VideoCard from "../components/tabs/video-card";
 
 const Home = () => {
+  const { loading, data, refetch } = useAppWrite({ fn: getAllPosts });
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const onRefresh = async () => {
     setRefreshing(true);
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    await refetch();
     setRefreshing(false);
   };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }]}
+        data={data}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="my-4 px-4 space-y-4">
             <View className="justify-between items-center flex-row mb-3">
