@@ -12,19 +12,9 @@ import icons from "../../../constants/icons";
 import { router, usePathname } from "expo-router";
 
 type FormFieldProps = {
-  title: string;
-  value: string;
-  handleChangeText: (e: any) => void;
-  otherStyles?: string;
-  keyboardType?: string;
+
 };
-const SearchInput = ({
-  title,
-  handleChangeText,
-  otherStyles,
-  keyboardType,
-  value,
-}: FormFieldProps) => {
+const SearchInput = ({}) => {
   const pathname = usePathname();
 
   const [query, setQuery] = useState("");
