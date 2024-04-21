@@ -12,12 +12,12 @@ import icons from "../../../constants/icons";
 import { router, usePathname } from "expo-router";
 
 type FormFieldProps = {
-
+  initialQuery?: string;
 };
-const SearchInput = ({}) => {
+const SearchInput = ({ initialQuery }: FormFieldProps) => {
   const pathname = usePathname();
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery || "");
   return (
     <View className="w-full flex-row items-center  h-16 space-x-4 px-4 bg-black-100 border-2 bg-input border-input rounded-2xl focus:border-secondary">
       <TextInput

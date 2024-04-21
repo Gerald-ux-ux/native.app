@@ -11,7 +11,7 @@ import useAppWrite from "../hooks/tabs/useAppWrite";
 import VideoCard from "../components/tabs/video-card";
 
 const Home = () => {
-  const { loading, data, refetch } = useAppWrite({ fn: getAllPosts });
+  const { data, refetch } = useAppWrite({ fn: getAllPosts });
   const { data: latestPosts } = useAppWrite({ fn: getLatestPosts });
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
