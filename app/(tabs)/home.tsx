@@ -3,7 +3,7 @@ import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../constants/images";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import EmptyState from "../components/tabs/empty-state";
 import SearchInput from "../components/tabs/search-input";
 import Trending from "../components/tabs/trending";
@@ -12,6 +12,8 @@ import VideoCard from "../components/tabs/video-card";
 
 const Home = () => {
   const { loading, data, refetch } = useAppWrite({ fn: getAllPosts });
+  const { data: latestPosts } = useAppWrite({ fn: getLatestPosts });
+
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -50,7 +52,7 @@ const Home = () => {
                 Latest videos
               </Text>
 
-              {/* <Trending posts={[{ id: 1 }, { id: 2 }] ?? []} /> */}
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}
