@@ -23,13 +23,13 @@ const zoomIn = {
     scale: 0.9,
   },
   1: {
-    scale: 1,
+    scale: 1.1,
   },
 };
 
 const zoomOut = {
   0: {
-    scale: 1,
+    scale: 1.1,
   },
   1: {
     scale: 0.9,
@@ -41,7 +41,7 @@ function TrendingItem({ activeItem, item }: TrendingItemProps) {
   return (
     <Animatable.View
       className="mr-5"
-      animation={activeItem.$id === item.$id ? zoomIn : zoomOut}
+      animation={activeItem === item.$id ? zoomIn : zoomOut}
       duration={500}
     >
       {play ? (
@@ -69,6 +69,12 @@ function TrendingItem({ activeItem, item }: TrendingItemProps) {
 }
 const Trending = ({ posts }: TrendingProps) => {
   const [activeItem, setActiveItem] = useState(posts[1]);
+
+  const viewableItemChanged = ({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setActiveItem(viewableItems[0].key);
+    }
+  };
   return (
     <FlatList
       data={posts}
@@ -76,6 +82,11 @@ const Trending = ({ posts }: TrendingProps) => {
       renderItem={({ item }) => (
         <TrendingItem item={item} activeItem={activeItem} />
       )}
+      onViewableItemsChanged={viewableItemChanged}
+      viewabilityConfig={{
+        itemVisiblePercentThreshold: 70,
+      }}
+      contentOffset={{ x: 170 }}
       horizontal
     />
   );
