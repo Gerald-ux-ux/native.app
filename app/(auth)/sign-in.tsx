@@ -1,12 +1,13 @@
-import { View, Text, ScrollView, Image } from "react-native";
-import React, { useState } from "react";
+import React from "react";
+import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import FormErrorMessage from "../../components/errors/form-error-message";
 import images from "../../constants/images";
+import Footer from "../components/auth/footer";
 import FormField from "../components/auth/form-field";
 import CustomButton from "../components/custom-btn";
-import Footer from "../components/auth/footer";
 import useSignIn from "../hooks/auth/useSignIn";
-import FormErrorMessage from "../../components/errors/form-error-message";
 
 const SignIn = () => {
   const { form, setForm, error, submit, isSubmitting } = useSignIn();

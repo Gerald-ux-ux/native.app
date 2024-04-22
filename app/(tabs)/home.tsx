@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../constants/images";
+import { useGlobalContext } from "../../context/GlobalProvide";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import EmptyState from "../components/tabs/empty-state";
 import SearchInput from "../components/tabs/search-input";
 import Trending from "../components/tabs/trending";
-import useAppWrite from "../hooks/tabs/useAppWrite";
 import VideoCard from "../components/tabs/video-card";
+import useAppWrite from "../hooks/tabs/useAppWrite";
 
 const Home = () => {
   const { data, refetch } = useAppWrite({ fn: getAllPosts });
   const { data: latestPosts } = useAppWrite({ fn: getLatestPosts });
+  const { user } = useGlobalContext();
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const onRefresh = async () => {
@@ -32,10 +34,10 @@ const Home = () => {
             <View className="justify-between items-center flex-row mb-3">
               <View>
                 <Text className="font-medium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome back,
                 </Text>
                 <Text className="text-2xl text-white font-semibold ">
-                  Gerald Kamau
+                  {user?.username}
                 </Text>
               </View>
               <View className="mt-1.5">
