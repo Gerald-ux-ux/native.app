@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+
 import { getCurrentUser } from "../lib/appwrite";
 
 const GlobalContext = createContext();
@@ -13,6 +14,7 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     getCurrentUser()
       .then((res) => {
+        console.log("res is ", res);
         if (res) {
           setIsLoggedIn(true);
           setUser(res);
@@ -28,6 +30,8 @@ const GlobalProvider = ({ children }) => {
         setIsLoading(false);
       });
   }, []);
+
+  console.log("user is ", user);
 
   return (
     <GlobalContext.Provider
