@@ -22,7 +22,7 @@ const Profile = () => {
     await signOut();
     setUser(null);
     setIsLoggedIn(false);
-    router.replace("/sign-in")
+    router.replace("/sign-in");
   };
   return (
     <SafeAreaView className="bg-primary h-full">
