@@ -1,14 +1,12 @@
-import { useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import React, { useEffect } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import icons from "../../constants/icons";
 import { useGlobalContext } from "../../context/GlobalProvide";
-import { getUserPosts, searchPosts } from "../../lib/appwrite";
+import { getUserPosts, signOut } from "../../lib/appwrite";
 import InfoBox from "../components/search/info-box";
-import EmptyState from "../components/tabs/empty-state";
-import SearchInput from "../components/tabs/search-input";
 import VideoCard from "../components/tabs/video-card";
 import useAppWrite from "../hooks/tabs/useAppWrite";
 
@@ -20,7 +18,12 @@ const Profile = () => {
     refetch();
   }, []);
 
-  const logout = () => {};
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
+    router.replace("/sign-in")
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
