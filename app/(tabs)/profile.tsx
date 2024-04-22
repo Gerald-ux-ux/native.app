@@ -49,18 +49,32 @@ const Profile = () => {
             </View>
 
             <InfoBox
-              title={user?.name}
+              title={user?.username}
               titleStyles="text-lg"
               containerStyles="mt-5"
             />
+
+            <View className="mt-5  flex-row">
+              <InfoBox
+                title={data?.length || 0}
+                titleStyles="text-xl"
+                subtitle="Posts"
+                containerStyles="mr-10"
+              />
+              <InfoBox
+                title="1.2k"
+                titleStyles="text-xl"
+                subtitle="Followers"
+              />
+            </View>
           </View>
         )}
-        ListEmptyComponent={() => (
-          <EmptyState
-            title="No videos Found"
-            // description={`No videos found for ${query}`}
-          />
-        )}
+        // ListEmptyComponent={() => (
+        //   <EmptyState
+        //     title="No videos Found"
+        //     // description={`No videos found for ${query}`}
+        //   />
+        // )}
       />
     </SafeAreaView>
   );
