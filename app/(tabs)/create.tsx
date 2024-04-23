@@ -4,6 +4,7 @@ import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "r
 
 import icons from "../../constants/icons";
 import FormField from "../components/auth/form-field";
+import CustomButton from "../components/custom-btn";
 
 const Create = () => {
   const [uploading, setUploading] = useState(false);
@@ -13,6 +14,8 @@ const Create = () => {
     thumbnail: null,
     prompt: "",
   });
+
+  function submit() {}
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
@@ -46,7 +49,7 @@ const Create = () => {
                   <Image
                     source={icons.upload}
                     resizeMode="contain"
-                    className="w-5 h-5"
+                    className="w-1/2 h-1/2"
                   />
                 </View>
               </View>
@@ -70,12 +73,30 @@ const Create = () => {
                 <Image
                   source={icons.upload}
                   resizeMode="contain"
-                  className="w-1/2 h-1/2"
+                  className="w-5 h-5"
                 />
+                <Text className="text-sm text-gray-100 font-medium">
+                  Choose a file
+                </Text>
               </View>
             )}
           </TouchableOpacity>
         </View>
+        <FormField
+          value={form.prompt}
+          placeholder="Prompt you used to create this video..."
+          handleChangeText={(e) => {
+            setForm({ ...form, prompt: e });
+          }}
+          title="Ai Prompt"
+          otherStyles="mt-7"
+        />
+        <CustomButton
+          containerStyles="mt-7 "
+          isLoading={uploading}
+          text="Submit & Publish"
+          handlePress={submit}
+        />
       </ScrollView>
     </SafeAreaView>
   );
