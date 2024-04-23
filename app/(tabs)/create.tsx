@@ -37,7 +37,7 @@ const Create = () => {
           <TouchableOpacity>
             {form.video ? (
               <Video
-                source={{ uri: form.video.uri }}
+                source={{ uri: form.video }}
                 className="w-full h-64 rounded-2xl"
                 useNativeControls
                 resizeMode={ResizeMode.COVER}
