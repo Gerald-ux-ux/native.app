@@ -4,8 +4,8 @@ import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../constants/images";
-import CustomButton from "./components/custom-btn";
 import { useGlobalContext } from "../context/GlobalProvide";
+import CustomButton from "./components/custom-btn";
 
 export default function App() {
   const { isLoading, isLoggedIn } = useGlobalContext();

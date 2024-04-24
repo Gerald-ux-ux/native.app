@@ -13,7 +13,7 @@ import CustomButton from "../components/custom-btn";
 
 const Create = () => {
   const { user } = useGlobalContext();
-
+  //  console.log(user)
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
