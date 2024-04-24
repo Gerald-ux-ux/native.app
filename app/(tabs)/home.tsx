@@ -23,6 +23,8 @@ const Home = () => {
     setRefreshing(false);
   };
 
+  
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
