@@ -1,5 +1,6 @@
 import { ResizeMode, Video } from "expo-av";
 import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -12,6 +13,7 @@ import CustomButton from "../components/custom-btn";
 
 const Create = () => {
   const { user } = useGlobalContext();
+
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -21,11 +23,13 @@ const Create = () => {
   });
 
   async function openPicker(selectType: any) {
-    const res = await DocumentPicker.getDocumentAsync({
-      type:
+    let res = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes:
         selectType === "image"
-          ? ["image/png", "image/jpg"]
-          : ["video/mp4", "video/gif"],
+          ? ImagePicker.MediaTypeOptions.Images
+          : ImagePicker.MediaTypeOptions.Videos,
+      aspect: [4, 3],
+      quality: 1,
     });
 
     if (!res.canceled) {
@@ -39,10 +43,6 @@ const Create = () => {
           ...prevForm,
           video: res.assets[0],
         }));
-      } else {
-        setTimeout(() => {
-          Alert.alert("Document Picked", JSON.stringify(res, null, 2));
-        }, 100);
       }
     }
   }
@@ -93,9 +93,7 @@ const Create = () => {
               <Video
                 source={{ uri: form.video }}
                 className="w-full h-64 rounded-2xl"
-                useNativeControls
                 resizeMode={ResizeMode.COVER}
-                isLooping
               />
             ) : (
               <View className="w-full h-40 px-4 bg-black rounded-2xl justify-center items-center">
