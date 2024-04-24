@@ -48,7 +48,7 @@ const Create = () => {
   }
 
   async function submit() {
-    if (!form.prompt || !form.title || !form.thumbnail || !form.video)
+    if (!form.prompt || !form.title || !form.thumbnail )
       return Alert.alert("Please fill in all required fields");
 
     setUploading(true);
