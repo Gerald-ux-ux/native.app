@@ -36,12 +36,12 @@ const Create = () => {
       if (selectType === "image") {
         setForm((prevForm: any) => ({
           ...prevForm,
-          thumbnail: res.assets[0],
+          thumbnail: res.assets[0].uri,
         }));
       } else if (selectType === "video") {
         setForm((prevForm: any) => ({
           ...prevForm,
-          video: res.assets[0],
+          video: res.assets[0].uri,
         }));
       }
     }
